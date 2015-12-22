@@ -7,13 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A6409A791C276A8C007044BE /* CubeTimeData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A6409A771C276A8C007044BE /* CubeTimeData.xcdatamodeld */; };
+		A65695E41C1F8BDE00D7B9DA /* Scrambler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65695E31C1F8BDE00D7B9DA /* Scrambler.swift */; };
+		A65695E61C1F933300D7B9DA /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65695E51C1F933300D7B9DA /* Timer.swift */; };
+		A665A8EE1C293C200007A9F1 /* cube.png in Resources */ = {isa = PBXBuildFile; fileRef = A665A8EB1C293C200007A9F1 /* cube.png */; };
+		A665A8EF1C293C200007A9F1 /* scramble-tab.png in Resources */ = {isa = PBXBuildFile; fileRef = A665A8EC1C293C200007A9F1 /* scramble-tab.png */; };
+		A665A8F01C293C200007A9F1 /* timer-tab.png in Resources */ = {isa = PBXBuildFile; fileRef = A665A8ED1C293C200007A9F1 /* timer-tab.png */; };
 		A6BBCAAF1B68B3070049FB00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBCAAE1B68B3070049FB00 /* AppDelegate.swift */; };
 		A6BBCAB11B68B3070049FB00 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBCAB01B68B3070049FB00 /* FirstViewController.swift */; };
-		A6BBCAB31B68B3070049FB00 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBCAB21B68B3070049FB00 /* SecondViewController.swift */; };
 		A6BBCAB61B68B3070049FB00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6BBCAB41B68B3070049FB00 /* Main.storyboard */; };
 		A6BBCAB81B68B3070049FB00 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6BBCAB71B68B3070049FB00 /* Images.xcassets */; };
 		A6BBCABB1B68B3070049FB00 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6BBCAB91B68B3070049FB00 /* LaunchScreen.xib */; };
 		A6BBCAC71B68B3070049FB00 /* CubeTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBCAC61B68B3070049FB00 /* CubeTimeTests.swift */; };
+		A6CEEB021B71EC0900F2AEC8 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CEEB011B71EC0900F2AEC8 /* SecondViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,17 +33,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A6409A781C276A8C007044BE /* CubeTimeData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CubeTimeData.xcdatamodel; sourceTree = "<group>"; };
+		A65695E31C1F8BDE00D7B9DA /* Scrambler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scrambler.swift; sourceTree = "<group>"; };
+		A65695E51C1F933300D7B9DA /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		A665A8EB1C293C200007A9F1 /* cube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cube.png; path = Images/cube.png; sourceTree = "<group>"; };
+		A665A8EC1C293C200007A9F1 /* scramble-tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "scramble-tab.png"; path = "Images/scramble-tab.png"; sourceTree = "<group>"; };
+		A665A8ED1C293C200007A9F1 /* timer-tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "timer-tab.png"; path = "Images/timer-tab.png"; sourceTree = "<group>"; };
 		A6BBCAA91B68B3070049FB00 /* CubeTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CubeTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6BBCAAD1B68B3070049FB00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6BBCAAE1B68B3070049FB00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A6BBCAB01B68B3070049FB00 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		A6BBCAB21B68B3070049FB00 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		A6BBCAB51B68B3070049FB00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A6BBCAB71B68B3070049FB00 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A6BBCABA1B68B3070049FB00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A6BBCAC01B68B3070049FB00 /* CubeTimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CubeTimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6BBCAC51B68B3070049FB00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6BBCAC61B68B3070049FB00 /* CubeTimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeTimeTests.swift; sourceTree = "<group>"; };
+		A6CEEB011B71EC0900F2AEC8 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,10 +91,13 @@
 		A6BBCAAB1B68B3070049FB00 /* CubeTime */ = {
 			isa = PBXGroup;
 			children = (
+				A6BBCAB41B68B3070049FB00 /* Main.storyboard */,
 				A6BBCAAE1B68B3070049FB00 /* AppDelegate.swift */,
 				A6BBCAB01B68B3070049FB00 /* FirstViewController.swift */,
-				A6BBCAB21B68B3070049FB00 /* SecondViewController.swift */,
-				A6BBCAB41B68B3070049FB00 /* Main.storyboard */,
+				A65695E51C1F933300D7B9DA /* Timer.swift */,
+				A65695E31C1F8BDE00D7B9DA /* Scrambler.swift */,
+				A6CEEB011B71EC0900F2AEC8 /* SecondViewController.swift */,
+				A6409A771C276A8C007044BE /* CubeTimeData.xcdatamodeld */,
 				A6BBCAB71B68B3070049FB00 /* Images.xcassets */,
 				A6BBCAB91B68B3070049FB00 /* LaunchScreen.xib */,
 				A6BBCAAC1B68B3070049FB00 /* Supporting Files */,
@@ -93,6 +108,9 @@
 		A6BBCAAC1B68B3070049FB00 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A665A8EB1C293C200007A9F1 /* cube.png */,
+				A665A8EC1C293C200007A9F1 /* scramble-tab.png */,
+				A665A8ED1C293C200007A9F1 /* timer-tab.png */,
 				A6BBCAAD1B68B3070049FB00 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -159,11 +177,13 @@
 		A6BBCAA11B68B3060049FB00 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = Bibek;
 				TargetAttributes = {
 					A6BBCAA81B68B3060049FB00 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = RM633P225J;
 					};
 					A6BBCABF1B68B3070049FB00 = {
 						CreatedOnToolsVersion = 6.4;
@@ -197,7 +217,10 @@
 			files = (
 				A6BBCAB61B68B3070049FB00 /* Main.storyboard in Resources */,
 				A6BBCABB1B68B3070049FB00 /* LaunchScreen.xib in Resources */,
+				A665A8EE1C293C200007A9F1 /* cube.png in Resources */,
+				A665A8EF1C293C200007A9F1 /* scramble-tab.png in Resources */,
 				A6BBCAB81B68B3070049FB00 /* Images.xcassets in Resources */,
+				A665A8F01C293C200007A9F1 /* timer-tab.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,8 +238,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6BBCAB31B68B3070049FB00 /* SecondViewController.swift in Sources */,
+				A6409A791C276A8C007044BE /* CubeTimeData.xcdatamodeld in Sources */,
 				A6BBCAAF1B68B3070049FB00 /* AppDelegate.swift in Sources */,
+				A65695E41C1F8BDE00D7B9DA /* Scrambler.swift in Sources */,
+				A65695E61C1F933300D7B9DA /* Timer.swift in Sources */,
+				A6CEEB021B71EC0900F2AEC8 /* SecondViewController.swift in Sources */,
 				A6BBCAB11B68B3070049FB00 /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,6 +306,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -295,7 +322,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -333,7 +360,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -344,9 +371,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CubeTime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = bibekg.edu.CubeTime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -354,9 +385,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CubeTime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = bibekg.edu.CubeTime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -374,6 +409,7 @@
 				);
 				INFOPLIST_FILE = CubeTimeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "self.edu.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CubeTime.app/CubeTime";
 			};
@@ -389,6 +425,7 @@
 				);
 				INFOPLIST_FILE = CubeTimeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "self.edu.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CubeTime.app/CubeTime";
 			};
@@ -413,6 +450,7 @@
 				A6BBCACC1B68B3070049FB00 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A6BBCACD1B68B3070049FB00 /* Build configuration list for PBXNativeTarget "CubeTimeTests" */ = {
 			isa = XCConfigurationList;
@@ -421,8 +459,22 @@
 				A6BBCACF1B68B3070049FB00 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A6409A771C276A8C007044BE /* CubeTimeData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A6409A781C276A8C007044BE /* CubeTimeData.xcdatamodel */,
+			);
+			currentVersion = A6409A781C276A8C007044BE /* CubeTimeData.xcdatamodel */;
+			path = CubeTimeData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A6BBCAA11B68B3060049FB00 /* Project object */;
 }
