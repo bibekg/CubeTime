@@ -28,7 +28,7 @@ class Stopwatch {
     
     // Returns elapsed time as a double in the form (seconds.milliseconds) without rounding
     func getTime() -> Double {
-        return time
+        return (Double(Int(time*100))/100)
     }
     // Returns number of minutes as an integer
     func getMinutes() -> Int {
