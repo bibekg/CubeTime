@@ -10,11 +10,11 @@ import UIKit
 
 class TableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITabBarDelegate {
     
-    var sortStyle = String()
     var solves = Solves()
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var sortStyleToggle: UISegmentedControl!
     
     // Statistics Labels
     @IBOutlet weak var bestTimeLabel: UILabel!
@@ -28,10 +28,14 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             self.navigationItem.rightBarButtonItem! = UIBarButtonItem(title: "Done", style: .Done, target: self, action: "editPressed:")
         } else {
             self.tableView.editing = false
-            self.navigationItem.rightBarButtonItem! = UIBarButtonItem(title: "Edit", style: .Plain, target: self, action: "editPressed:")
+            self.navigationItem.rightBarButtonItem! = UIBarButtonItem(title: "Edit", style: .Done, target: self, action: "editPressed:")
         }
     }
     
+    @IBAction func sortStyleChanged(sender: UISegmentedControl) {
+        sortByStyle()
+        self.tableView.reloadData()
+    }
     //--------------------------//
     //------- Table View -------//
     //--------------------------//
@@ -43,12 +47,12 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return solves.dateSortedList.count
+        return solves.displayList.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TimeCell")
-        let solve = solves.dateSortedList[indexPath.row]
+        let solve = solves.displayList[indexPath.row]
         let time = solve.valueForKey("time") as! Double
         let date = solve.valueForKey("date") as! NSDate
         
@@ -107,6 +111,8 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             setStatistics()
             
             tableView.endUpdates()
+            tableView.reloadData()
+            setStatistics()
         }
     }
     
@@ -126,6 +132,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                     destination.date = solve.valueForKey("date") as! NSDate
                     destination.time = solve.valueForKey("time") as! Double
                     destination.scramble = solve.valueForKey("scramble") as! String
+                    destination.inspectionUsed = solve.valueForKey("inspectionUsed") as! Bool
                 }
             }
         }
@@ -137,14 +144,15 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        sortByStyle()
+        solves.displayList = solves.dateSortedList
         title = "Previous Solves"
-        sortStyle = "date"
     }
     
     override func viewWillAppear(animated: Bool) {
-        solves.downloadByAscendingTimes()
+        UIApplication.sharedApplication().idleTimerDisabled = false
+        sortByStyle()
         self.tableView.reloadData()
-        
         setStatistics()
     }
     
@@ -154,26 +162,49 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func setStatistics() {
-        solves.downloadByAscendingTimes()
+        solves.downloadByTime()
         solves.downloadByDate()
         
-        let total = solves.dateSortedList.count
-        let bestTime = solves.timeSortedList[0].valueForKey("time") as! Double
-        let worstTime = solves.timeSortedList[solves.timeSortedList.count - 1].valueForKey("time") as! Double
-        var totalSum = 0.0
-        var fiveSum = 0.0
-        for (var i = 0; i < total; i++) {
-            if (i < 5) {
-                fiveSum += solves.dateSortedList[i].valueForKey("time") as! Double
-            }
-            totalSum += solves.dateSortedList[i].valueForKey("time") as! Double
+        if solves.dateSortedList.count == 0 {
+            self.bestTimeLabel.text = "Best time: "
+            self.worstTimeLabel.text = "Worst time: "
+            self.averageAllLabel.text = "Average (all): "
+            self.averageFiveLabel.text = "Average (last 5): "
         }
         
-        self.bestTimeLabel.text = "Best time: " + String(bestTime)
-        self.worstTimeLabel.text = "Worst time: " + String(worstTime)
-        self.averageAllLabel.text = "Average (all): " + String(format: "%.2f", totalSum/Double(total))
-        self.averageFiveLabel.text = "Average (last 5): " + String(format: "%.2f", fiveSum/min(Double(total), 5.0))
+        else {
+            let total = solves.dateSortedList.count
+            let bestTime = solves.timeSortedList[0].valueForKey("time") as! Double
+            let worstTime = solves.timeSortedList[solves.timeSortedList.count - 1].valueForKey("time") as! Double
+            var totalSum = 0.0
+            var fiveSum = 0.0
+            for (var i = 0; i < total; i++) {
+                if (i < 5) {
+                    fiveSum += solves.dateSortedList[i].valueForKey("time") as! Double
+                }
+                totalSum += solves.dateSortedList[i].valueForKey("time") as! Double
+            }
+            
+            self.bestTimeLabel.text = "Best time: " + String(bestTime)
+            self.worstTimeLabel.text = "Worst time: " + String(worstTime)
+            self.averageAllLabel.text = "Average (all): " + String(format: "%.2f", totalSum/Double(total))
+            self.averageFiveLabel.text = "Average (last 5): " + String(format: "%.2f", fiveSum/min(Double(total), 5.0))
+        }
     }
+    
+    func sortByStyle() {
+    switch sortStyleToggle.selectedSegmentIndex {
+    case 0: // Sort by date
+        solves.downloadByDate()
+        solves.displayList = solves.dateSortedList
+    case 1: // Sort by time
+        solves.downloadByTime()
+        solves.displayList = solves.timeSortedList
+    default:
+        solves.displayList = solves.dateSortedList
+        print("SegmentedControl failed")
+    }
+}
 }
 
 // Global function used by this and OneSolveViewController to get human-readable date
@@ -183,5 +214,7 @@ func cleanDate(date: NSDate) -> String {
     let dateString = dateFormatter.stringFromDate(date)
     return String(dateString)
 }
+
+
 
 

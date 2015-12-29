@@ -10,10 +10,10 @@
 		A6187BBD1C2D0CDE002F5B8C /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = A6187BBC1C2D0CDE002F5B8C /* background.png */; };
 		A62A4C3B1C2BF74C0069A1AE /* Solves.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62A4C3A1C2BF74C0069A1AE /* Solves.swift */; };
 		A62A4C471C2C10A20069A1AE /* divider-alt.png in Resources */ = {isa = PBXBuildFile; fileRef = A62A4C461C2C10A20069A1AE /* divider-alt.png */; };
+		A62E602D1C32739700A8DD32 /* SingleSolve.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62E602C1C32739700A8DD32 /* SingleSolve.swift */; };
 		A6409A791C276A8C007044BE /* CubeTimeData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A6409A771C276A8C007044BE /* CubeTimeData.xcdatamodeld */; };
 		A65695E41C1F8BDE00D7B9DA /* Scrambler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65695E31C1F8BDE00D7B9DA /* Scrambler.swift */; };
 		A65695E61C1F933300D7B9DA /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65695E51C1F933300D7B9DA /* Timer.swift */; };
-		A665A8EE1C293C200007A9F1 /* cube.png in Resources */ = {isa = PBXBuildFile; fileRef = A665A8EB1C293C200007A9F1 /* cube.png */; };
 		A6BA965C1C29FDEE006EC685 /* OneSolveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BA965B1C29FDEE006EC685 /* OneSolveViewController.swift */; };
 		A6BBCAAF1B68B3070049FB00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBCAAE1B68B3070049FB00 /* AppDelegate.swift */; };
 		A6BBCAB11B68B3070049FB00 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBCAB01B68B3070049FB00 /* MainViewController.swift */; };
@@ -38,10 +38,10 @@
 		A6187BBC1C2D0CDE002F5B8C /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		A62A4C3A1C2BF74C0069A1AE /* Solves.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Solves.swift; sourceTree = "<group>"; };
 		A62A4C461C2C10A20069A1AE /* divider-alt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "divider-alt.png"; sourceTree = "<group>"; };
+		A62E602C1C32739700A8DD32 /* SingleSolve.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleSolve.swift; sourceTree = "<group>"; };
 		A6409A781C276A8C007044BE /* CubeTimeData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CubeTimeData.xcdatamodel; sourceTree = "<group>"; };
 		A65695E31C1F8BDE00D7B9DA /* Scrambler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scrambler.swift; sourceTree = "<group>"; };
 		A65695E51C1F933300D7B9DA /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
-		A665A8EB1C293C200007A9F1 /* cube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cube.png; path = Images/cube.png; sourceTree = "<group>"; };
 		A6BA965B1C29FDEE006EC685 /* OneSolveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneSolveViewController.swift; sourceTree = "<group>"; };
 		A6BBCAA91B68B3070049FB00 /* CubeTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CubeTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6BBCAAD1B68B3070049FB00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -102,6 +102,7 @@
 				A65695E31C1F8BDE00D7B9DA /* Scrambler.swift */,
 				A6CEEB011B71EC0900F2AEC8 /* TableViewController.swift */,
 				A62A4C3A1C2BF74C0069A1AE /* Solves.swift */,
+				A62E602C1C32739700A8DD32 /* SingleSolve.swift */,
 				A6BA965B1C29FDEE006EC685 /* OneSolveViewController.swift */,
 				A6409A771C276A8C007044BE /* CubeTimeData.xcdatamodeld */,
 				A6BBCAB71B68B3070049FB00 /* Images.xcassets */,
@@ -116,7 +117,6 @@
 			children = (
 				A62A4C461C2C10A20069A1AE /* divider-alt.png */,
 				A6187BBC1C2D0CDE002F5B8C /* background.png */,
-				A665A8EB1C293C200007A9F1 /* cube.png */,
 				A6BBCAAD1B68B3070049FB00 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -224,7 +224,6 @@
 				A6BBCAB61B68B3070049FB00 /* Main.storyboard in Resources */,
 				A6187BBD1C2D0CDE002F5B8C /* background.png in Resources */,
 				A6BBCABB1B68B3070049FB00 /* LaunchScreen.xib in Resources */,
-				A665A8EE1C293C200007A9F1 /* cube.png in Resources */,
 				A62A4C471C2C10A20069A1AE /* divider-alt.png in Resources */,
 				A6BBCAB81B68B3070049FB00 /* Images.xcassets in Resources */,
 			);
@@ -245,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6409A791C276A8C007044BE /* CubeTimeData.xcdatamodeld in Sources */,
+				A62E602D1C32739700A8DD32 /* SingleSolve.swift in Sources */,
 				A6BBCAAF1B68B3070049FB00 /* AppDelegate.swift in Sources */,
 				A65695E41C1F8BDE00D7B9DA /* Scrambler.swift in Sources */,
 				A62A4C3B1C2BF74C0069A1AE /* Solves.swift in Sources */,
@@ -409,10 +409,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -429,10 +425,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = CubeTimeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "self.edu.$(PRODUCT_NAME:rfc1034identifier)";

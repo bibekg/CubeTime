@@ -15,15 +15,29 @@ protocol TimerResponder: class {
 // FIX: Adapt class to computed variable convention in Swift
 class Stopwatch {
     var delegate: TimerResponder?
+    
+    var inspectionTime = 15.0
     let timeInterval = 0.01
     var time = 0.0
+    var inspectionWanted: Bool = false
     var timer = NSTimer()
+    var downTimer = NSTimer()
 
     func startTimer() {
-            timer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: Selector("trackTime"), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: Selector("trackTime"), userInfo: nil, repeats: true)
     }
+    
+    func startDownTimer() {
+        time = inspectionTime
+        downTimer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: Selector("trackDownTime"), userInfo: nil, repeats: true)
+    }
+    
     func stopTimer() {
         timer.invalidate()
+    }
+    
+    func stopDownTimer() {
+        downTimer.invalidate()
     }
     
     // Returns elapsed time as a double in the form (seconds.milliseconds) without rounding
@@ -43,10 +57,18 @@ class Stopwatch {
         return toMSM(time).ms
     }
     
-    // Called by timer every (timeInterval) seconds, then uses FVCDelegate to update time label
+    // Called by timer every (timeInterval) seconds, then uses MVCDelegate to update time label
     @objc private func trackTime() {
         time += timeInterval
         delegate?.updateTimer(getMinutes(), sec: getSeconds(), ms: getMilliseconds())
+    }
+    @objc private func trackDownTime() {
+        time -= timeInterval
+        delegate?.updateTimer(getMinutes(), sec: getSeconds(), ms: getMilliseconds())
+        if (time < 0.01) {
+            downTimer.invalidate()
+            startTimer()
+        }
     }
     
     // Returns the minute, second, and millisecond components of a time

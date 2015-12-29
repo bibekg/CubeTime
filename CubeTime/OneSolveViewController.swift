@@ -9,13 +9,14 @@
 import UIKit
 import Foundation
 
-let attributesCount = 3;
+let attributesCount = 4;
 
 class OneSolveViewController: UIViewController, UITableViewDataSource {
     
     var date = NSDate()
-    var time: Double = 0.0
+    var time: Double = 0
     var scramble: String = ""
+    var inspectionUsed: Bool = false
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -28,6 +29,12 @@ class OneSolveViewController: UIViewController, UITableViewDataSource {
         switch indexPath.row {
         case 0: cell?.textLabel?.text = String("\(time) seconds")
         case 1: cell?.textLabel?.text = String(scramble)
+        case 2:
+            if inspectionUsed {
+                cell?.textLabel?.text = "15 second inspection"
+            } else {
+                cell?.textLabel?.text = "No inspection"
+            }
         default: cell?.textLabel?.text = "ERROR: EXTRA CELL CREATED"
         }
         return cell!

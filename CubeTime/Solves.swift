@@ -11,6 +11,8 @@ import UIKit
 import CoreData
 
 class Solves: NSManagedObject {
+
+    var displayList = [NSManagedObject]()
     
     var dateSortedList = [NSManagedObject]()
     var timeSortedList = [NSManagedObject]()
@@ -30,7 +32,7 @@ class Solves: NSManagedObject {
         }
     }
     
-    func downloadByAscendingTimes() {
+    func downloadByTime() {
         let managedContext = appDelegate.managedObjectContext
         let sortDescriptor = NSSortDescriptor(key: "time", ascending: true)
         let sortDescriptors = [sortDescriptor]
@@ -44,7 +46,7 @@ class Solves: NSManagedObject {
         }
     }
     
-    func saveSolve(time: Double, scramble: String) {
+    func saveSolve(time: Double, scramble: String, inspectionUsed: Bool) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         let entity =  NSEntityDescription.entityForName("Solve",
@@ -56,6 +58,7 @@ class Solves: NSManagedObject {
         solve.setValue(time, forKey: "time")
         solve.setValue(scramble, forKey: "scramble")
         solve.setValue(date, forKey: "date")
+        solve.setValue(inspectionUsed, forKey: "inspectionUsed")
         
         do {
             try managedContext.save()
@@ -68,9 +71,9 @@ class Solves: NSManagedObject {
     
     func deleteSolve(indexPath: NSIndexPath) {
         let managedContext = appDelegate.managedObjectContext
-        let solveToDelete = dateSortedList[indexPath.row]
+        let solveToDelete = displayList[indexPath.row]
         managedContext.deleteObject(solveToDelete)
-        dateSortedList.removeAtIndex(indexPath.row)
+        displayList.removeAtIndex(indexPath.row)
         do {
             try managedContext.save()
         } catch {

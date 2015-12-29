@@ -12,7 +12,10 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cube.png" translatesAutoresizingMaskIntoConstraints="NO" id="QQ4-Ej-wdS">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="ldA-ed-O8E">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cube" translatesAutoresizingMaskIntoConstraints="NO" id="QQ4-Ej-wdS">
                     <rect key="frame" x="60" y="60" width="360" height="360"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="QQ4-Ej-wdS" secondAttribute="height" multiplier="1:1" id="joV-zu-WjT"/>
@@ -22,8 +25,12 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="QQ4-Ej-wdS" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.75" id="7d1-6Q-1bP"/>
+                <constraint firstAttribute="bottom" secondItem="ldA-ed-O8E" secondAttribute="bottom" id="Vd4-5f-Rxc"/>
+                <constraint firstItem="ldA-ed-O8E" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Xtd-ov-UB5"/>
+                <constraint firstAttribute="trailing" secondItem="ldA-ed-O8E" secondAttribute="trailing" id="cPR-QN-2Kq"/>
                 <constraint firstItem="QQ4-Ej-wdS" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="iFa-p3-QIt"/>
                 <constraint firstItem="QQ4-Ej-wdS" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="jXo-A6-yjF"/>
+                <constraint firstItem="ldA-ed-O8E" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="l1w-YJ-ppf"/>
                 <constraint firstItem="QQ4-Ej-wdS" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.75" id="pT3-gG-s6S"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -37,6 +44,7 @@
         </view>
     </objects>
     <resources>
-        <image name="cube.png" width="525" height="480"/>
+        <image name="cube" width="500" height="500"/>
+        <image name="launch" width="2000" height="2000"/>
     </resources>
 </document>
