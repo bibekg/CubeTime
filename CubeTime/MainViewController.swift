@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 protocol TableViewResponder: class {
     func refreshTable()
@@ -14,8 +15,9 @@ protocol TableViewResponder: class {
 
 class MainViewController: UIViewController, TimerResponder {
     
-    var solves = Solves()
+//    var solves = Solves()
     var delegate: TableViewResponder?
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     //-------------------------//
     //------- Scrambler -------//
@@ -29,7 +31,7 @@ class MainViewController: UIViewController, TimerResponder {
     
     @IBOutlet weak var inspectionSwitchTitle: UILabel!
     @IBOutlet weak var inspectionSwitch: UISwitch!
-    var scramble: String?
+    var scramble = String()
     let algorithm = Algorithm()
     
     // Generates and outputs a new algorithm based on slider value
@@ -121,7 +123,6 @@ class MainViewController: UIViewController, TimerResponder {
             }
             stopwatch.stopTimer()
             stopwatch.stopDownTimer()
-            
         }
     }
     
@@ -136,7 +137,8 @@ class MainViewController: UIViewController, TimerResponder {
     // Saves current time to core data
     @IBAction func savePressed(sender: AnyObject) {
         if (stopwatch.time != 0) {
-            solves.saveSolve(stopwatch.getTime(), scramble: scramble!, inspectionUsed: stopwatch.inspectionWanted)
+            let solves = SolvesStore()
+            solves.saveSolve(stopwatch.time, scramble: scramble, inspectionUsed: stopwatch.inspectionWanted, moc: managedObjectContext)
             moveUI("Save Time")
             createScramble()
             stopwatch.time = 0.0
@@ -145,12 +147,11 @@ class MainViewController: UIViewController, TimerResponder {
     }
     
     func createUserMessage() {
-        self.solves.downloadByTime()
-        if solves.timeSortedList.count > 1 && stopwatch.time < solves.timeSortedList[0].valueForKey("time") as! Double  {
+        if solveList.count > 1 && stopwatch.time < solveList[0].time {
             message = "New best time!"
         }
             // If the current time will be a new top 3 time (unless there are less than 3 total times)
-        else if solves.timeSortedList.count > 3 && stopwatch.time < solves.timeSortedList[2].valueForKey("time") as! Double {
+        else if solveList.count > 3 && stopwatch.time < solveList[2].time {
             message = "You got a top 3 time!"
         }
     }
@@ -174,13 +175,32 @@ class MainViewController: UIViewController, TimerResponder {
         startOrStopLabel.setTitle("Start", forState: .Normal)
         stopwatch.inspectionWanted = false
 
-        solves.downloadByDate()
         moveUI("Load")
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().idleTimerDisabled = true
+    }
+    
+    //-------------------------//
+    //------- Core Data -------//
+    //-------------------------//
+    
+    var solveList: [Solve] {
+        get {
+            var results = [Solve]()
+            let sortDescriptor = NSSortDescriptor(key: "time", ascending: true)
+            let sortDescriptors = [sortDescriptor]
+            let fetchRequest = NSFetchRequest(entityName: "Solve")
+            fetchRequest.sortDescriptors = sortDescriptors
+            do {
+                results = try managedObjectContext.executeFetchRequest(fetchRequest) as! [Solve]
+            } catch let error as NSError {
+                print("Could not fetch \(error), \(error.userInfo)")
+            }
+            return results
+        }
     }
     
     //--------------------------//
