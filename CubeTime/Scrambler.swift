@@ -86,7 +86,11 @@ class Algorithm {
             let notation = notations[randomFace][randomTurn]
             
             // Appends single notation to full algorithm.
-            algorithm += " \(notation.notation)"
+            if i == 0 {
+                algorithm += String(notation.notation)
+            } else {
+                algorithm += " \(notation.notation)"
+            }
         }
         return algorithm
     }

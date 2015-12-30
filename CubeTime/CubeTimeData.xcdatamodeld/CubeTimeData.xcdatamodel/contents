@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15B42" minimumToolsVersion="Xcode 7.0">
-    <entity name="Solve" syncable="YES">
-        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="inspectionUsed" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="scramble" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="time" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+    <entity name="Solve" representedClassName="Solve" syncable="YES">
+        <attribute name="date" attributeType="Date" syncable="YES"/>
+        <attribute name="inspectionUsed" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="scramble" attributeType="String" syncable="YES"/>
+        <attribute name="time" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
     </entity>
     <elements>
         <element name="Solve" positionX="-45" positionY="0" width="128" height="105"/>

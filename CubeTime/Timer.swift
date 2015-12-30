@@ -16,12 +16,40 @@ protocol TimerResponder: class {
 class Stopwatch {
     var delegate: TimerResponder?
     
-    var inspectionTime = 15.0
+    let inspectionTime = 15.0
     let timeInterval = 0.01
-    var time = 0.0
     var inspectionWanted: Bool = false
+    
     var timer = NSTimer()
     var downTimer = NSTimer()
+    
+    var time: Double = 0
+    
+    var minutes: Int {
+        get {
+            var minutes = 0
+            if time >= 60 {
+                minutes = Int(time / 60)
+            }
+            return minutes
+        }
+    }
+    
+    var seconds: Int {
+        get {
+            var seconds = 0
+            if time >= 1 {
+                seconds = Int(time % 60)
+            }
+            return seconds
+        }
+    }
+    
+    var milliseconds: Int {
+        get {
+            return Int((time % 1) * 100)
+        }
+    }
 
     func startTimer() {
         timer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: Selector("trackTime"), userInfo: nil, repeats: true)
@@ -40,49 +68,18 @@ class Stopwatch {
         downTimer.invalidate()
     }
     
-    // Returns elapsed time as a double in the form (seconds.milliseconds) without rounding
-    func getTime() -> Double {
-        return (Double(Int(time*100))/100)
-    }
-    // Returns number of minutes as an integer
-    func getMinutes() -> Int {
-        return toMSM(time).min
-    }
-    // Returns number of seconds as an integer
-    func getSeconds() -> (Int) {
-        return toMSM(time).sec
-    }
-    // Returns number of milliseconds as an integer
-    func getMilliseconds() -> (Int) {
-        return toMSM(time).ms
-    }
-    
     // Called by timer every (timeInterval) seconds, then uses MVCDelegate to update time label
     @objc private func trackTime() {
-        time += timeInterval
-        delegate?.updateTimer(getMinutes(), sec: getSeconds(), ms: getMilliseconds())
+        time = time + timeInterval
+        delegate?.updateTimer(minutes, sec: seconds, ms: milliseconds)
     }
+    
     @objc private func trackDownTime() {
-        time -= timeInterval
-        delegate?.updateTimer(getMinutes(), sec: getSeconds(), ms: getMilliseconds())
+        time = time - timeInterval
+        delegate?.updateTimer(minutes, sec: seconds, ms: milliseconds)
         if (time < 0.01) {
             downTimer.invalidate()
             startTimer()
         }
-    }
-    
-    // Returns the minute, second, and millisecond components of a time
-    private func toMSM(time: Double) -> (min: Int, sec: Int, ms: Int) {
-        var min: Int = 0
-        var sec: Int = 0
-        if time >= 60 {
-            min = Int(time / 60)
-        }
-        if time >= 1 {
-            sec = Int(time % 60)
-        }
-        let ms: Int = Int((time % 1)*100)
-        
-        return (min, sec, ms)
     }
 }

@@ -10,7 +10,8 @@ import UIKit
 
 class TableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITabBarDelegate {
     
-    var solves = Solves()
+    var solves = SolvesStore()
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var editButton: UIBarButtonItem!
@@ -104,7 +105,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         if let indexPath = deleteSolveIndexPath {
             tableView.beginUpdates()
             
-            solves.deleteSolve(indexPath)
+            solves.deleteSolve(indexPath, moc: managedObjectContext)
             // Note that indexPath is wrapped in an array:  [indexPath]
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             deleteSolveIndexPath = nil
@@ -128,11 +129,11 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         if segue.identifier == "viewSolveSegue" {
             if let destination = segue.destinationViewController as? OneSolveViewController {
                 if let solveIndex = tableView.indexPathForSelectedRow?.row {
-                    let solve = solves.dateSortedList[solveIndex]
-                    destination.date = solve.valueForKey("date") as! NSDate
-                    destination.time = solve.valueForKey("time") as! Double
-                    destination.scramble = solve.valueForKey("scramble") as! String
-                    destination.inspectionUsed = solve.valueForKey("inspectionUsed") as! Bool
+                    let solve = solves.displayList[solveIndex]
+                    destination.date = solve.date
+                    destination.time = solve.time
+                    destination.scramble = solve.scramble
+                    destination.inspectionUsed = solve.inspectionUsed
                 }
             }
         }
@@ -162,8 +163,6 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func setStatistics() {
-        solves.downloadByTime()
-        solves.downloadByDate()
         
         if solves.dateSortedList.count == 0 {
             self.bestTimeLabel.text = "Best time: "
@@ -171,7 +170,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             self.averageAllLabel.text = "Average (all): "
             self.averageFiveLabel.text = "Average (last 5): "
         }
-        
+            
         else {
             let total = solves.dateSortedList.count
             let bestTime = solves.timeSortedList[0].valueForKey("time") as! Double
@@ -193,18 +192,16 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func sortByStyle() {
-    switch sortStyleToggle.selectedSegmentIndex {
-    case 0: // Sort by date
-        solves.downloadByDate()
-        solves.displayList = solves.dateSortedList
-    case 1: // Sort by time
-        solves.downloadByTime()
-        solves.displayList = solves.timeSortedList
-    default:
-        solves.displayList = solves.dateSortedList
-        print("SegmentedControl failed")
+        switch sortStyleToggle.selectedSegmentIndex {
+        case 0: // Sort by date
+            solves.displayList = solves.dateSortedList
+        case 1: // Sort by time
+            solves.displayList = solves.timeSortedList
+        default:
+            solves.displayList = solves.dateSortedList
+            print("SegmentedControl failed")
+        }
     }
-}
 }
 
 // Global function used by this and OneSolveViewController to get human-readable date
@@ -214,7 +211,3 @@ func cleanDate(date: NSDate) -> String {
     let dateString = dateFormatter.stringFromDate(date)
     return String(dateString)
 }
-
-
-
-
