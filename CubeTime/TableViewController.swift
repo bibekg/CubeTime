@@ -133,7 +133,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                     destination.date = solve.date
                     destination.time = solve.time
                     destination.scramble = solve.scramble
-                    destination.inspectionUsed = solve.inspectionUsed
+                    destination.inspectionTime = solve.inspectionTime
                 }
             }
         }

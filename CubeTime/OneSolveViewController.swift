@@ -16,7 +16,7 @@ class OneSolveViewController: UIViewController, UITableViewDataSource {
     var date = NSDate()
     var time: Double = 0
     var scramble: String = ""
-    var inspectionUsed: Bool = false
+    var inspectionTime: Int32 = 0
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -30,8 +30,8 @@ class OneSolveViewController: UIViewController, UITableViewDataSource {
         case 0: cell?.textLabel?.text = String("\(time) seconds")
         case 1: cell?.textLabel?.text = String(scramble)
         case 2:
-            if inspectionUsed {
-                cell?.textLabel?.text = "15 second inspection"
+            if inspectionTime != 0 {
+                cell?.textLabel?.text = "\(inspectionTime) second inspection"
             } else {
                 cell?.textLabel?.text = "No inspection"
             }

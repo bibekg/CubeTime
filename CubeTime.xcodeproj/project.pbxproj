@@ -16,12 +16,15 @@
 		A65695E61C1F933300D7B9DA /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65695E51C1F933300D7B9DA /* Timer.swift */; };
 		A6BA965C1C29FDEE006EC685 /* OneSolveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BA965B1C29FDEE006EC685 /* OneSolveViewController.swift */; };
 		A6BBCAAF1B68B3070049FB00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBCAAE1B68B3070049FB00 /* AppDelegate.swift */; };
-		A6BBCAB11B68B3070049FB00 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBCAB01B68B3070049FB00 /* MainViewController.swift */; };
 		A6BBCAB61B68B3070049FB00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6BBCAB41B68B3070049FB00 /* Main.storyboard */; };
 		A6BBCAB81B68B3070049FB00 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6BBCAB71B68B3070049FB00 /* Images.xcassets */; };
 		A6BBCABB1B68B3070049FB00 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6BBCAB91B68B3070049FB00 /* LaunchScreen.xib */; };
 		A6BBCAC71B68B3070049FB00 /* CubeTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBCAC61B68B3070049FB00 /* CubeTimeTests.swift */; };
+		A6C328D21C33C80300EF5DD4 /* clapping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A6C328D11C33C80300EF5DD4 /* clapping.mp3 */; };
 		A6CEEB021B71EC0900F2AEC8 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CEEB011B71EC0900F2AEC8 /* TableViewController.swift */; };
+		A6F67B5A1C33BE5D009ADF12 /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = A6F67B591C33BE5D009ADF12 /* beep.wav */; };
+		A6F67B5C1C33C459009ADF12 /* countdown.wav in Resources */ = {isa = PBXBuildFile; fileRef = A6F67B5B1C33C459009ADF12 /* countdown.wav */; };
+		A6F92A811C33CB6900466E0F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F92A801C33CB6900466E0F /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,14 +49,17 @@
 		A6BBCAA91B68B3070049FB00 /* CubeTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CubeTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6BBCAAD1B68B3070049FB00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6BBCAAE1B68B3070049FB00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A6BBCAB01B68B3070049FB00 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A6BBCAB51B68B3070049FB00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A6BBCAB71B68B3070049FB00 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A6BBCABA1B68B3070049FB00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A6BBCAC01B68B3070049FB00 /* CubeTimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CubeTimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6BBCAC51B68B3070049FB00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6BBCAC61B68B3070049FB00 /* CubeTimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeTimeTests.swift; sourceTree = "<group>"; };
+		A6C328D11C33C80300EF5DD4 /* clapping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clapping.mp3; sourceTree = "<group>"; };
 		A6CEEB011B71EC0900F2AEC8 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		A6F67B591C33BE5D009ADF12 /* beep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep.wav; sourceTree = "<group>"; };
+		A6F67B5B1C33C459009ADF12 /* countdown.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = countdown.wav; sourceTree = "<group>"; };
+		A6F92A801C33CB6900466E0F /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +103,7 @@
 			children = (
 				A6BBCAB41B68B3070049FB00 /* Main.storyboard */,
 				A6BBCAAE1B68B3070049FB00 /* AppDelegate.swift */,
-				A6BBCAB01B68B3070049FB00 /* MainViewController.swift */,
+				A6F92A801C33CB6900466E0F /* MainViewController.swift */,
 				A65695E51C1F933300D7B9DA /* Timer.swift */,
 				A65695E31C1F8BDE00D7B9DA /* Scrambler.swift */,
 				A6CEEB011B71EC0900F2AEC8 /* TableViewController.swift */,
@@ -115,6 +121,9 @@
 		A6BBCAAC1B68B3070049FB00 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A6F67B591C33BE5D009ADF12 /* beep.wav */,
+				A6F67B5B1C33C459009ADF12 /* countdown.wav */,
+				A6C328D11C33C80300EF5DD4 /* clapping.mp3 */,
 				A62A4C461C2C10A20069A1AE /* divider-alt.png */,
 				A6187BBC1C2D0CDE002F5B8C /* background.png */,
 				A6BBCAAD1B68B3070049FB00 /* Info.plist */,
@@ -225,7 +234,10 @@
 				A6187BBD1C2D0CDE002F5B8C /* background.png in Resources */,
 				A6BBCABB1B68B3070049FB00 /* LaunchScreen.xib in Resources */,
 				A62A4C471C2C10A20069A1AE /* divider-alt.png in Resources */,
+				A6F67B5A1C33BE5D009ADF12 /* beep.wav in Resources */,
+				A6F67B5C1C33C459009ADF12 /* countdown.wav in Resources */,
 				A6BBCAB81B68B3070049FB00 /* Images.xcassets in Resources */,
+				A6C328D21C33C80300EF5DD4 /* clapping.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,8 +261,8 @@
 				A65695E41C1F8BDE00D7B9DA /* Scrambler.swift in Sources */,
 				A62A4C3B1C2BF74C0069A1AE /* Solves.swift in Sources */,
 				A65695E61C1F933300D7B9DA /* Timer.swift in Sources */,
+				A6F92A811C33CB6900466E0F /* MainViewController.swift in Sources */,
 				A6CEEB021B71EC0900F2AEC8 /* TableViewController.swift in Sources */,
-				A6BBCAB11B68B3070049FB00 /* MainViewController.swift in Sources */,
 				A6BA965C1C29FDEE006EC685 /* OneSolveViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

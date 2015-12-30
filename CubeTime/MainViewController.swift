@@ -29,10 +29,11 @@ class MainViewController: UIViewController, TimerResponder {
     @IBOutlet var slider: UISlider!
     @IBOutlet var scrambleAlgorithm: UILabel!
     
-    @IBOutlet weak var inspectionSwitchTitle: UILabel!
-    @IBOutlet weak var inspectionSwitch: UISwitch!
+    @IBOutlet weak var inspectionControlLabel: UILabel!
+    @IBOutlet weak var inspectionControl: UISegmentedControl!
     var scramble = String()
     let algorithm = Algorithm()
+    
     
     // Generates and outputs a new algorithm based on slider value
     @IBAction func scramblePressed(sender: AnyObject) {
@@ -64,26 +65,21 @@ class MainViewController: UIViewController, TimerResponder {
     
     // Constraints for Animations
     var resetButtonYPositionConstraint: NSLayoutConstraint?
-    var saveButtonYPositionConstraint: NSLayoutConstraint?
     var scrambleSliderYPositionConstraint: NSLayoutConstraint?
-    var inspectionSwitchYPositionConstraint: NSLayoutConstraint?
     var messageLabelXPositionConstraint: NSLayoutConstraint?
     
     let stopwatch = Stopwatch()
     var message: String? = nil
     
-    // Allows for inspection time if toggled on
-    @IBAction func inspectionSwitchToggled(sender: UISwitch) {
-        if sender.on {
-            stopwatch.inspectionWanted = true
-            updateTimer(0, sec: Int(stopwatch.inspectionTime), ms: 0)
-        }
-        else if !(sender.on) {
+    @IBAction func inspectionControlUsed(sender: UISegmentedControl) {
+        stopwatch.inspectionTime = Int(inspectionControl.titleForSegmentAtIndex(inspectionControl.selectedSegmentIndex)!)!
+        if inspectionControl.selectedSegmentIndex == 0 {
             stopwatch.inspectionWanted = false
-            updateTimer(0, sec: 0, ms: 0)
+        } else {
+            stopwatch.inspectionWanted = true
         }
+        updateTimer(0, sec: Int(stopwatch.inspectionTime), ms: 0)
     }
-    
     // Updates timer every "timeInterval" seconds
     func updateTimer(min: Int, sec: Int, ms: Int) {
         let newMin = String(format: "%02d", min)
@@ -108,15 +104,15 @@ class MainViewController: UIViewController, TimerResponder {
                 stopwatch.startTimer()
             }
             moveUI("Start")
-            UIView.animateWithDuration(animationDuration, animations: {
-                self.startOrStopLabel.setTitle("Stop", forState: .Normal)
-            })
+            self.startOrStopLabel.setTitle("Stop", forState: .Normal)
         }
             
         // User hit STOP
         else {
+            
             createUserMessage()
             if (stopwatch.downTimer.valid) {
+                stopwatch.stopCountdownSound()
                 moveUI("Down Time Stop")
             } else {
                 moveUI("Stop")
@@ -128,7 +124,7 @@ class MainViewController: UIViewController, TimerResponder {
     
     // Reset the timer to 00:00
     @IBAction func resetPressed(sender: AnyObject) {
-        stopwatch.time = 0.0
+        stopwatch.elapsedTime = 0.0
         updateTimer(0, sec: 0, ms: 0)
         createScramble()
         moveUI("Reset")
@@ -136,22 +132,24 @@ class MainViewController: UIViewController, TimerResponder {
     
     // Saves current time to core data
     @IBAction func savePressed(sender: AnyObject) {
-        if (stopwatch.time != 0) {
+        if (stopwatch.elapsedTime != 0) {
             let solves = SolvesStore()
-            solves.saveSolve(stopwatch.time, scramble: scramble, inspectionUsed: stopwatch.inspectionWanted, moc: managedObjectContext)
+            solves.saveSolve(stopwatch.getTime(), scramble: scramble, inspectionTime: stopwatch.inspectionTime, moc: managedObjectContext)
             moveUI("Save Time")
             createScramble()
-            stopwatch.time = 0.0
+            stopwatch.elapsedTime = 0.0
             updateTimer(0, sec: 0, ms: 0)
         }
     }
     
+    // Creates message for user based on solve time
     func createUserMessage() {
-        if solveList.count > 1 && stopwatch.time < solveList[0].time {
+        if solveList.count > 1 && stopwatch.elapsedTime < solveList[0].time {
             message = "New best time!"
+            stopwatch.playClapSound()
         }
             // If the current time will be a new top 3 time (unless there are less than 3 total times)
-        else if solveList.count > 3 && stopwatch.time < solveList[2].time {
+        else if solveList.count > 3 && stopwatch.elapsedTime < solveList[2].time {
             message = "You got a top 3 time!"
         }
     }
@@ -162,7 +160,7 @@ class MainViewController: UIViewController, TimerResponder {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showResetAndSaveButtons()
+        showResetButton()
         performConstraintLayout(true)
         
         // Scrambler Prep
@@ -174,6 +172,7 @@ class MainViewController: UIViewController, TimerResponder {
         timeLabel.text = "00:00:00"
         startOrStopLabel.setTitle("Start", forState: .Normal)
         stopwatch.inspectionWanted = false
+        stopwatch.prepareToPlaySounds()
 
         moveUI("Load")
     }
@@ -221,9 +220,6 @@ class MainViewController: UIViewController, TimerResponder {
                 removeThisConstraint(resetButtonYPositionConstraint)
                 resetButtonYPositionConstraint = NSLayoutConstraint(item: resetButton, attribute: .Top, relatedBy: .Equal, toItem: resetView, attribute: .Bottom, multiplier: 1, constant: 0)
                 
-                removeThisConstraint(saveButtonYPositionConstraint)
-                saveButtonYPositionConstraint = NSLayoutConstraint(item: saveButton, attribute: .Top, relatedBy: .Equal, toItem: saveView, attribute: .Bottom, multiplier: 1, constant: 0)
-                
                 // Moves slider, switch, and labels above view
                 removeThisConstraint(scrambleSliderYPositionConstraint)
                 scrambleSliderYPositionConstraint = NSLayoutConstraint(item: slider, attribute: .CenterY, relatedBy: .Equal, toItem: view1, attribute: .CenterY, multiplier: 1.3, constant: 0)
@@ -241,7 +237,7 @@ class MainViewController: UIViewController, TimerResponder {
                 
                 message = nil
                 
-                view.addConstraints([resetButtonYPositionConstraint!, saveButtonYPositionConstraint!, scrambleSliderYPositionConstraint!, messageLabelXPositionConstraint!])
+                view.addConstraints([resetButtonYPositionConstraint!,  scrambleSliderYPositionConstraint!, messageLabelXPositionConstraint!])
                 
                 if situation == "Load" {
                     performConstraintLayout(false)
@@ -275,8 +271,7 @@ class MainViewController: UIViewController, TimerResponder {
                     }, completion: nil)
 
                 removeThisConstraint(resetButtonYPositionConstraint)
-                removeThisConstraint(saveButtonYPositionConstraint)
-                showResetAndSaveButtons()
+                showResetButton()
                 
                 if message != nil {
                     messageLabel.text = message!
@@ -317,12 +312,10 @@ class MainViewController: UIViewController, TimerResponder {
         }
     }
     
-    func showResetAndSaveButtons() {
+    func showResetButton() {
         // resetButton.CenterY = 1*resetView.CenterY + 0
         resetButtonYPositionConstraint = NSLayoutConstraint(item: resetButton, attribute: .CenterY, relatedBy: .Equal, toItem: resetView, attribute: .CenterY, multiplier: 1, constant: 0)
-        // saveButton.CenterY = 1*saveView.CenterY + 0
-        saveButtonYPositionConstraint = NSLayoutConstraint(item: saveButton, attribute: .CenterY, relatedBy: .Equal, toItem: saveView, attribute: .CenterY, multiplier: 1, constant: 0)
-        view.addConstraints([resetButtonYPositionConstraint!, saveButtonYPositionConstraint!])
+        view.addConstraints([resetButtonYPositionConstraint!])
     }
     
     func putMessageOnLeft() {

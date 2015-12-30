@@ -35,7 +35,7 @@ class SolvesStore {
     var dateSortedList: [Solve] {
         get {
             var results = [Solve]()
-            let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
+            let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
             let sortDescriptors = [sortDescriptor]
             let fetchRequest = NSFetchRequest(entityName: "Solve")
             fetchRequest.sortDescriptors = sortDescriptors
@@ -48,12 +48,12 @@ class SolvesStore {
         }
     }
     
-    func saveSolve(time: Double, scramble: String, inspectionUsed: Bool, moc: NSManagedObjectContext) {
+    func saveSolve(time: Double, scramble: String, inspectionTime: Int, moc: NSManagedObjectContext) {
         let newSolve = NSEntityDescription.insertNewObjectForEntityForName("Solve", inManagedObjectContext: moc) as! Solve
         newSolve.time = time
         newSolve.scramble = scramble
         newSolve.date = NSDate()
-        newSolve.inspectionUsed = inspectionUsed
+        newSolve.inspectionTime = Int32(inspectionTime)
         
         do {
             try moc.save()

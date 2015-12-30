@@ -71,27 +71,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CubeTime/Timer.swift"
-            timestampString = "473148379.095778"
+            timestampString = "473157993.380242"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "trackTime()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CubeTime/Timer.swift"
-            timestampString = "473148379.095778"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "trackDownTime()"
             landmarkType = "5">
          </BreakpointContent>
@@ -103,11 +87,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CubeTime/Timer.swift"
-            timestampString = "473148379.095778"
+            timestampString = "473157993.380242"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "trackDownTime()"
             landmarkType = "5">
          </BreakpointContent>

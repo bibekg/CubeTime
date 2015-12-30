@@ -2,7 +2,7 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15B42" minimumToolsVersion="Xcode 7.0">
     <entity name="Solve" representedClassName="Solve" syncable="YES">
         <attribute name="date" attributeType="Date" syncable="YES"/>
-        <attribute name="inspectionUsed" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="inspectionTime" attributeType="Integer 32" defaultValueString="NO" syncable="YES"/>
         <attribute name="scramble" attributeType="String" syncable="YES"/>
         <attribute name="time" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
     </entity>

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 protocol TimerResponder: class {
     func updateTimer(min: Int, sec: Int, ms: Int)
@@ -16,20 +17,28 @@ protocol TimerResponder: class {
 class Stopwatch {
     var delegate: TimerResponder?
     
-    let inspectionTime = 15.0
+    var countdownSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("countdown", ofType: "wav")!)
+    var countdown = AVAudioPlayer()
+    var beepSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("beep", ofType: "wav")!)
+    var beep = AVAudioPlayer()
+    var clapSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("clapping", ofType: "mp3")!)
+    var clap = AVAudioPlayer()
+    
+    var inspectionTime = Int()
     let timeInterval = 0.01
     var inspectionWanted: Bool = false
     
     var timer = NSTimer()
     var downTimer = NSTimer()
     
-    var time: Double = 0
+    var elapsedTime: Double = 0
+    var baseTime = NSTimeInterval()
     
     var minutes: Int {
         get {
             var minutes = 0
-            if time >= 60 {
-                minutes = Int(time / 60)
+            if elapsedTime >= 60 {
+                minutes = Int(elapsedTime / 60)
             }
             return minutes
         }
@@ -38,8 +47,8 @@ class Stopwatch {
     var seconds: Int {
         get {
             var seconds = 0
-            if time >= 1 {
-                seconds = Int(time % 60)
+            if elapsedTime >= 1 {
+                seconds = Int(elapsedTime % 60)
             }
             return seconds
         }
@@ -47,39 +56,74 @@ class Stopwatch {
     
     var milliseconds: Int {
         get {
-            return Int((time % 1) * 100)
+            return Int((elapsedTime % 1) * 100)
         }
     }
-
+    
+    func getTime() -> Double {
+        return (Double(Int(elapsedTime*100)) / 100.0)
+    }
+    
     func startTimer() {
+        baseTime = NSDate.timeIntervalSinceReferenceDate()
         timer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: Selector("trackTime"), userInfo: nil, repeats: true)
     }
-    
-    func startDownTimer() {
-        time = inspectionTime
-        downTimer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: Selector("trackDownTime"), userInfo: nil, repeats: true)
-    }
-    
     func stopTimer() {
         timer.invalidate()
     }
+    @objc private func trackTime() {
+        let currentTime = NSDate.timeIntervalSinceReferenceDate()
+        elapsedTime = currentTime - baseTime
+        delegate?.updateTimer(minutes, sec: seconds, ms: milliseconds)
+    }
     
+    func startDownTimer() {
+        baseTime = NSDate.timeIntervalSinceReferenceDate()
+        elapsedTime = Double(inspectionTime)
+        downTimer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: Selector("trackDownTime"), userInfo: nil, repeats: true)
+    }
     func stopDownTimer() {
         downTimer.invalidate()
     }
-    
-    // Called by timer every (timeInterval) seconds, then uses MVCDelegate to update time label
-    @objc private func trackTime() {
-        time = time + timeInterval
-        delegate?.updateTimer(minutes, sec: seconds, ms: milliseconds)
-    }
-    
     @objc private func trackDownTime() {
-        time = time - timeInterval
+        let currentTime = NSDate.timeIntervalSinceReferenceDate()
+        elapsedTime = Double(inspectionTime) - (currentTime - baseTime)
         delegate?.updateTimer(minutes, sec: seconds, ms: milliseconds)
-        if (time < 0.01) {
-            downTimer.invalidate()
+        
+        if elapsedTime < 4.02 && elapsedTime > 3.98 {
+            playCountdownSound()
+        }
+        if elapsedTime < 0.01 {
+            beep.play()
+            stopDownTimer()
             startTimer()
         }
+    }
+    
+    func prepareToPlaySounds() {
+        do {
+            try countdown = AVAudioPlayer(contentsOfURL: countdownSound, fileTypeHint: nil)
+            try beep = AVAudioPlayer(contentsOfURL: beepSound, fileTypeHint: nil)
+            try clap = AVAudioPlayer(contentsOfURL: clapSound, fileTypeHint: nil)
+        } catch {
+            print("Audio failed")
+        }
+        countdown.prepareToPlay()
+        beep.prepareToPlay()
+        clap.prepareToPlay()
+    }
+    
+    func playCountdownSound() {
+        countdown.play()
+    }
+    
+    func stopCountdownSound() {
+        if countdown.playing {
+            countdown.stop()
+        }
+    }
+    
+    func playClapSound() {
+        clap.play()
     }
 }

@@ -15,5 +15,5 @@ class Solve: NSManagedObject {
     @NSManaged var time: Double
     @NSManaged var scramble: String
     @NSManaged var date: NSDate
-    @NSManaged var inspectionUsed: Bool
+    @NSManaged var inspectionTime: Int32
 }
